@@ -1,0 +1,8 @@
+.git
+.env
+.ruff_cache
+python_backend/.git
+python_backend/.venv
+python_backend/__pycache__
+nextjs_website/node_modules
+nextjs_website/.next

@@ -1,0 +1,12 @@
+[project]
+name = "python-backend"
+version = "0.1.0"
+description = "KittenTTS backend API"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[standard]>=0.115.0",
+    "uvicorn>=0.30.0",
+    "soundfile>=0.13.0",
+    "kittentts @ https://github.com/KittenML/KittenTTS/releases/download/0.8/kittentts-0.8.0-py3-none-any.whl",
+]
