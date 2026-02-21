@@ -24,7 +24,7 @@ docker run -p 5072:5072 kittentts-webui
 ## Tech stack
 - **Frontend**: Next.js 16 (Tailwind CSS)
 - **Backend**: Python 3.12 (FastAPI, ONNX Runtime)
-- **Deployment**: Single Docker image, ~1.5GB (all 4 models pre-cached)
+- **Deployment**: Single Docker image, ~1.5GB (all 4 models pre-cached). The Docker image was built for x86_64 (amd64). ARM support (Apple Silicon) has not been tested.
 
 ## Supported models
 - kitten-tts-mini
