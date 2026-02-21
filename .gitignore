@@ -1,1 +1,29 @@
-node_modules
+# Dependencies
+node_modules/
+
+# Next.js build output and cache
+.next/
+out/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# Environment variables
+.env
+.env.*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Misc
+.ruff_cache/
+*.wav
