@@ -9,4 +9,16 @@ dependencies = [
     "uvicorn>=0.30.0",
     "soundfile>=0.13.0",
     "kittentts @ https://github.com/KittenML/KittenTTS/releases/download/0.8/kittentts-0.8.0-py3-none-any.whl",
+    "torch>=2.0.0",
 ]
+
+# Use CPU-only PyTorch to avoid pulling ~3.2GB of NVIDIA CUDA libraries.
+# KittenTTS uses ONNX Runtime for inference and does not use PyTorch at all;
+# torch is only a transitive dep via misaki[en] -> spacy-curated-transformers.
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }

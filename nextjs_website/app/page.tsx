@@ -2,8 +2,6 @@
 
 import { useState, useRef, useCallback } from "react";
 
-const BACKEND_URL = "http://localhost:5073";
-
 const MODELS = [
   { value: "KittenML/kitten-tts-mini-0.8", label: "kitten-tts-mini (80M)" },
   { value: "KittenML/kitten-tts-micro-0.8", label: "kitten-tts-micro (40M)" },
@@ -127,21 +125,30 @@ export default function Home() {
 
     try {
       const params = new URLSearchParams({ text: input, voice, model });
-      const res = await fetch(`${BACKEND_URL}/tts?${params.toString()}`);
+      const res = await fetch(`/api/tts?${params.toString()}`);
       if (!res.ok) {
         const body = await res.json().catch(() => null);
-        throw new Error(body?.detail || "TTS generation failed");
+        throw new Error(
+          body?.detail ||
+          (res.status === 504 ? "Request timed out. The model may still be loading -- try again." :
+           res.status === 502 ? "Cannot reach the TTS backend. Is it running?" :
+           `TTS generation failed (HTTP ${res.status})`)
+        );
       }
 
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
       setAudioUrl(url);
     } catch (err) {
-      setError(
-        err instanceof Error
-          ? err.message
-          : "Failed to generate audio. Is the backend running?"
-      );
+      if (err instanceof TypeError && err.message === "Failed to fetch") {
+        setError("Network error -- could not connect to the server.");
+      } else {
+        setError(
+          err instanceof Error
+            ? err.message
+            : "Something went wrong. Please try again."
+        );
+      }
     } finally {
       setLoading(false);
     }
@@ -291,7 +298,19 @@ export default function Home() {
 
           {/* Error message */}
           {error && (
-            <p className="mt-4 text-center text-sm text-red-600">{error}</p>
+            <div className="mt-4 flex items-start gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3">
+              <p className="flex-1 text-sm text-red-700">{error}</p>
+              <button
+                onClick={() => setError(null)}
+                className="shrink-0 text-red-400 transition-colors hover:text-red-600"
+                aria-label="Dismiss"
+              >
+                <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
+            </div>
           )}
         </div>
 

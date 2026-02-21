@@ -31,9 +31,11 @@ WORKDIR /app/python_backend
 COPY python_backend/ ./
 
 ENV UV_SKIP_WHEEL_FILENAME_CHECK=1
-# Pre-install setuptools so that source distributions (docopt via num2words)
-# can build without needing to fetch it from PyPI during uv sync.
-RUN pip install --no-cache-dir setuptools
+# Create the venv and pre-install setuptools into it so that source
+# distributions (docopt via num2words) can build without needing to
+# fetch setuptools from PyPI during uv sync. This avoids DNS issues
+# that occur inside Docker BuildKit's parallel build stages.
+RUN uv venv .venv && uv pip install setuptools
 RUN uv sync
 
 # Pre-download all model weights into the HuggingFace cache so
