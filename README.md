@@ -18,7 +18,8 @@ docker run -p 5072:5072 kittentts-webui
 **Then go to http://localhost:5072**
 
 ## Screenshot
-![link goes here]
+<img width="1851" height="924" alt="Screenshot from 2026-02-21 19-41-29" src="https://github.com/user-attachments/assets/46f87343-9875-4421-aeb7-5e03ea268bb4" />
+
 
 ## Tech stack
 - **Frontend**: Next.js 16 (Tailwind CSS)
@@ -29,7 +30,7 @@ docker run -p 5072:5072 kittentts-webui
 - kitten-tts-mini
 - kitten-tts-micro
 - kitten-tts-nano
-- kitten-tts-nano-0.8-int8
+- kitten-tts-nano-int8
 
 ## Supported voices
 - Bella
