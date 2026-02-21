@@ -18,7 +18,8 @@ docker run -p 5072:5072 kittentts-webui
 **Then go to http://localhost:5072**
 
 ## Screenshot
-<img width="1851" height="924" alt="Screenshot from 2026-02-21 19-41-29" src="https://github.com/user-attachments/assets/46f87343-9875-4421-aeb7-5e03ea268bb4" />
+<img width="1850" height="924" alt="Screenshot" src="https://github.com/user-attachments/assets/0b339043-a752-4d33-b060-bd60767f4436" />
+
 
 
 ## Tech stack
